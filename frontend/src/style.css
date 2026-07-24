@@ -576,6 +576,14 @@ footer small {
   background: rgba(18, 32, 45, 0.72);
   backdrop-filter: blur(3px);
 }
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  background: rgba(21, 31, 38, 0.12);
+}
 .auth-modal {
   position: relative;
   width: min(420px, 100%);
@@ -660,6 +668,84 @@ footer small {
   background: transparent;
   color: var(--red);
   font-size: 14px;
+  font-weight: 700;
+}
+
+.listing-verification {
+  width: min(520px, 100%);
+}
+
+.verification-form {
+  display: grid;
+  gap: 15px;
+  margin-top: 22px;
+}
+
+.verification-form label {
+  display: grid;
+  gap: 7px;
+  color: #24313c;
+  font-weight: 650;
+  font-size: 0.88rem;
+}
+
+.verification-row,
+.otp-row,
+.location-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.verification-row input,
+.otp-row input,
+.verification-form textarea {
+  width: 100%;
+  border: 1px solid #d6dde1;
+  border-radius: 8px;
+  padding: 11px 12px;
+  color: #24313c;
+  font: inherit;
+  resize: vertical;
+}
+
+.verification-row button,
+.otp-row button,
+.location-actions button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0 13px;
+  background: #e84855;
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.location-actions button {
+  padding: 10px 13px;
+}
+
+.location-actions .location-button {
+  background: #eef2f4;
+  color: #24313c;
+}
+
+.verification-row button:disabled,
+.location-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.verification-status {
+  margin: 18px 0 12px;
+  color: #58707f;
+  font-size: 0.88rem;
+}
+
+.verified-note {
+  color: #187557;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 .toast {
