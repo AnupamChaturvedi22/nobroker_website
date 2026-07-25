@@ -1,11 +1,13 @@
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { useAuth } from './contexts/AuthContext';
 import BrowsingPage from './pages/BrowsingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import PropertyChoicePage from './pages/PropertyChoicePage';
 import ListPropertyVerification from './pages/ListPropertyVerification';
+import BuyHomePage from './pages/BuyHomePage';
+import RentHomePage from './pages/RentHomePage';
+import ListPropertyPage from './pages/ListPropertyPage';
 
 function PublicRoutes() {
   const navigate = useNavigate();
@@ -22,17 +24,38 @@ function PublicRoutes() {
 function ChoiceRoute() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const [listingVerification, setListingVerification] = useState(false);
-  const [notice, setNotice] = useState('');
   if (!user) return <Navigate to="/" replace />;
-  const notify = text => { setNotice(text); window.setTimeout(() => setNotice(''), 2600); };
-  const choosePath = action => action === 'List' ? setListingVerification(true) : notify(`Opening ${action.toLowerCase()} home options.`);
-  return <><PropertyChoicePage user={user} onChoice={choosePath} onLogout={() => { logout(); navigate('/'); }} />
-    {listingVerification && <ListPropertyVerification user={user} onClose={() => setListingVerification(false)} onComplete={() => { setListingVerification(false); notify('Verification complete. Your property listing is ready to create.'); }} />}
-    {notice && <div className="toast">{notice}</div>}
-  </>;
+  const destinations = {
+    Buy: '/buy-home',
+    Rent: '/rent-home',
+    List: '/list-property/verify',
+  };
+
+  return <PropertyChoicePage
+    user={user}
+    onChoice={action => navigate(destinations[action])}
+    onLogout={() => { logout(); navigate('/'); }}
+  />;
+}
+
+function ProtectedRoute({ children }) {
+  const { user } = useAuth();
+  return user ? children : <Navigate to="/login" replace />;
 }
 
 export default function App() {
-  return <Routes><Route path="/choices" element={<ChoiceRoute />} /><Route path="*" element={<PublicRoutes />} /></Routes>;
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  return <Routes>
+    <Route path="/choices" element={<ProtectedRoute><ChoiceRoute /></ProtectedRoute>} />
+    <Route path="/buy-home" element={<ProtectedRoute><BuyHomePage onBack={() => navigate('/choices')} /></ProtectedRoute>} />
+    <Route path="/rent-home" element={<ProtectedRoute><RentHomePage onBack={() => navigate('/choices')} /></ProtectedRoute>} />
+    <Route
+      path="/list-property/verify"
+      element={<ProtectedRoute><ListPropertyVerification user={user} onClose={() => navigate('/choices')} onComplete={() => navigate('/list-property')} /></ProtectedRoute>}
+    />
+    <Route path="/list-property" element={<ProtectedRoute><ListPropertyPage onBack={() => navigate('/choices')} /></ProtectedRoute>} />
+    <Route path="*" element={<PublicRoutes />} />
+  </Routes>;
 }
