@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import Brand from '../components/Brand';
-import { ArrowRight } from '../components/PropertyIcons';
-import { propertyOptions } from '../data/propertyOptions';
-
+import Brand from '../../components/Brand';
+import { ArrowRight } from '../../components/PropertyIcons';
+import { propertyOptions } from '../properties/propertyOptions';
+import Footer from '../../components/Footer';
 const filterConfig = {
   Rent: { priceLabel: 'Monthly rent', prices: ['Any monthly rent', 'Under 20,000', '20,000 - 40,000', '40,000+'], typeLabel: 'Furnishing', types: ['Any furnishing', 'Fully furnished', 'Semi furnished', 'Unfurnished'] },
   Buy: { priceLabel: 'Property price', prices: ['Any price', 'Under 75 Lakh', '75 Lakh - 1 Cr', '1 Cr+'], typeLabel: 'Property type', types: ['All property types', 'Apartment', 'Independent house', 'Villa'] },
   Commercial: { priceLabel: 'Monthly rent', prices: ['Any monthly rent', 'Under 30,000', '30,000 - 75,000', '75,000+'], typeLabel: 'Space type', types: ['All commercial spaces', 'Office', 'Shop', 'Warehouse'] },
 };
 
-export default function BrowsingPage({ onLogin, onRegister }) {
+export default function LandingPage({ onLogin, onRegister }) {
   const [tab, setTab] = useState('Rent');
   const [location, setLocation] = useState('');
   const [price, setPrice] = useState(filterConfig.Rent.prices[0]);
@@ -33,7 +33,7 @@ export default function BrowsingPage({ onLogin, onRegister }) {
       <section className="journey-section" id="journey"><div className="section-heading"><div><p className="kicker">START YOUR JOURNEY</p><h2>What brings you here?</h2></div></div><div className="category-grid">{propertyOptions.map(option => <button className="category-card" onClick={() => selectCategory(option.action)} key={option.title}><span className="category-icon">{option.icon}</span><h3>{option.title}</h3><p>{option.text}</p><span className="arrow"><ArrowRight /></span></button>)}</div></section>
       <section className="owner-banner" id="owners"><div><p className="kicker">ARE YOU A PROPERTY OWNER?</p><h2>Your property deserves the right audience.</h2><p>List your property for free and connect directly with genuine seekers.</p><button onClick={() => selectCategory('List')}>List your property <ArrowRight /></button></div><div className="banner-art">HOME</div></section>
     </main>
-    <footer><Brand /><p>India's property platform connecting owners and seekers directly.</p><div className="footer-links"><a>About us</a><a>Careers</a><a>Help center</a><a>Terms and privacy</a></div><small>Copyright 2026 NoBroker-inspired UI demo.</small></footer>
+    <Footer />
     {notice && <div className="toast">{notice}</div>}
   </>;
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Brand from "../components/Brand";
-import "./ListPropertyPage.css";
+import Brand from "../../components/Brand";
+// import "./ListPropertyPage.css";
 
 const steps = [
     {

@@ -1,7 +1,7 @@
-import { Building, House, KeyRound } from '../components/PropertyIcons';
-import buyHomeImage from '../assets/property-options/buy-home.png';
-import rentHomeImage from '../assets/property-options/rent-home.png';
-import listPropertyImage from '../assets/property-options/list-property.png';
+import { Building, House, KeyRound } from '../../components/PropertyIcons';
+import buyHomeImage from '../../assets/property-options/buy-home.png';
+import rentHomeImage from '../../assets/property-options/rent-home.png';
+import listPropertyImage from '../../assets/property-options/list-property.png';
 
 export const propertyOptions = [
   { icon: <House />, image: buyHomeImage, title: 'Buy a home', text: 'Find a place to own, at your pace.', action: 'Buy' },

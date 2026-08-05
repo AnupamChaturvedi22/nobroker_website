@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Brand from '../components/Brand';
+import Brand from '../../components/Brand';
 
 export default function ListPropertyVerification({ user, onClose, onComplete }) {
   const [email, setEmail] = useState(user.email || '');
