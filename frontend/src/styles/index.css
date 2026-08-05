@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap");
-
+@import "tailwindcss";
 :root {
   --red: #df3438;
   --red-dark: #bc242a;
@@ -537,6 +537,10 @@ button {
   opacity: 0.11;
   transform: rotate(-8deg);
 }
+
+
+
+
 footer {
   max-width: 1200px;
   margin: auto;
@@ -566,6 +570,18 @@ footer small {
 .footer-links a:hover {
   color: var(--red);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -1062,7 +1078,7 @@ footer small {
   }
 }
 .hero {
-  background: #fff url("./assets/hero-real-estate.png") center 58% / cover
+  background: #fff url("../assets/hero-real-estate.png") center 58% / cover
     no-repeat;
 }
 .hero:before,
