@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useAuth } from './useAuth';
 import Brand from '../../components/Brand';
 
-const NAVY = '#0F1B2D';
-const GOLD = '#C9A24B';
+const NAVY = '#172C43';
+const RED = '#DF3438';
 
 function FieldIcon({ children }) {
   return (
@@ -43,7 +43,7 @@ const CloseIcon = () => (
 );
 
 const inputClasses =
-  'w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-3 text-sm text-gray-900 placeholder-gray-400 outline-none transition-colors focus:border-[#C9A24B] focus:ring-1 focus:ring-[#C9A24B]';
+  'w-full rounded-md border border-[#D5DCE2] bg-white py-2.5 pl-10 pr-3 text-sm text-gray-900 placeholder-gray-400 outline-none transition-colors focus:border-[#DF3438] focus:ring-2 focus:ring-[#FCE4E4]';
 
 export default function AuthForm({ mode, onClose, onSuccess, onSwitch }) {
   const isRegister = mode === 'register';
@@ -69,24 +69,24 @@ export default function AuthForm({ mode, onClose, onSuccess, onSwitch }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+      className="modal-backdrop"
       onMouseDown={onClose}
     >
       <section
-        className="relative w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl"
+        className={`auth-modal ${isRegister ? 'auth-modal--register' : ''}`}
         onMouseDown={(event) => event.stopPropagation()}
       >
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+          className="close-modal flex h-8 w-8 items-center justify-center rounded-full transition-colors hover:bg-red-50 hover:text-[#DF3438]"
         >
           <CloseIcon />
         </button>
 
         <Brand />
 
-        <h2 className="mt-6 text-2xl font-bold" style={{ color: NAVY }}>
+        <h2 style={{ color: NAVY }}>
           {isRegister ? 'Create your account' : 'Welcome back'}
         </h2>
         <p className="mt-1 text-sm text-gray-500">
@@ -95,7 +95,7 @@ export default function AuthForm({ mode, onClose, onSuccess, onSwitch }) {
             : 'Login to choose how you want to get started.'}
         </p>
 
-        <form onSubmit={submit} className="mt-6 space-y-4">
+        <form onSubmit={submit} className="auth-form">
           {isRegister && (
             <label className="block">
               <span className="mb-1.5 block text-sm font-medium text-gray-700">Full name</span>
@@ -188,8 +188,7 @@ export default function AuthForm({ mode, onClose, onSuccess, onSwitch }) {
 
           <button
             disabled={loading}
-            className="w-full rounded-lg py-2.5 text-sm font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-60"
-            style={{ backgroundColor: NAVY }}
+            className="auth-submit w-full transition-colors hover:bg-[#BC242A] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? 'Please wait...' : isRegister ? 'Create account' : 'Login'}
           </button>
@@ -197,16 +196,15 @@ export default function AuthForm({ mode, onClose, onSuccess, onSwitch }) {
 
         <button
           onClick={onSwitch}
-          className="mt-5 w-full text-center text-sm font-medium transition-colors"
-          style={{ color: NAVY }}
+          className="switch-auth transition-colors hover:text-[#BC242A]"
         >
           {isRegister ? (
             <>
-              Already have an account? <span style={{ color: GOLD }}>Login</span>
+              Already have an account? <span>Login</span>
             </>
           ) : (
             <>
-              New to NoBroker? <span style={{ color: GOLD }}>Register</span>
+              New to NoBroker? <span>Register</span>
             </>
           )}
         </button>

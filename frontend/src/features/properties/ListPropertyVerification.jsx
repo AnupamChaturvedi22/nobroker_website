@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import Brand from '../../components/Brand';
 
+const MailIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>;
+const PhoneIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" /></svg>;
+
 export default function ListPropertyVerification({ user, onClose, onComplete }) {
   const [email, setEmail] = useState(user.email || '');
   const [phone, setPhone] = useState(user.phone || '');
@@ -60,12 +63,12 @@ export default function ListPropertyVerification({ user, onClose, onComplete }) 
       <p>Confirm your contact details and property location before you post for free.</p>
       <div className="verification-form">
         <label>Email address
-          <span className="verification-row"><input type="email" value={email} onChange={event => { setEmail(event.target.value); setVerified(current => ({ ...current, email: false })); setOtpRequested(current => ({ ...current, email: false })); }} /><button type="button" onClick={requestEmailOtp}>{otpRequested.email ? 'Resend OTP' : 'Send OTP'}</button></span>
+          <span className="verification-row"><span className="verification-input-wrap"><MailIcon /><input type="email" value={email} onChange={event => { setEmail(event.target.value); setVerified(current => ({ ...current, email: false })); setOtpRequested(current => ({ ...current, email: false })); }} /></span>{!verified.email && <button type="button" onClick={requestEmailOtp}>{otpRequested.email ? 'Resend OTP' : 'Send OTP'}</button>}</span>
           {otpRequested.email && !verified.email && <span className="otp-row"><input aria-label="Email OTP" type="text" inputMode="numeric" maxLength="6" value={otp.email} onChange={event => setOtp(current => ({ ...current, email: event.target.value.replace(/\D/g, '') }))} placeholder="Enter 6-digit email OTP" /><button type="button" onClick={() => confirmOtp('email')}>Confirm OTP</button></span>}
           {verified.email && <span className="verified-note">Email OTP verified</span>}
         </label>
         <label>Mobile number
-          <span className="verification-row"><input type="tel" inputMode="numeric" maxLength="10" value={phone} onChange={event => { setPhone(event.target.value.replace(/\D/g, '')); setVerified(current => ({ ...current, phone: false })); setOtpRequested(current => ({ ...current, phone: false })); }} placeholder="10-digit mobile number" /><button type="button" onClick={requestPhoneOtp}>{otpRequested.phone ? 'Resend OTP' : 'Send OTP'}</button></span>
+          <span className="verification-row"><span className="verification-input-wrap"><PhoneIcon /><input type="tel" inputMode="numeric" maxLength="10" value={phone} onChange={event => { setPhone(event.target.value.replace(/\D/g, '')); setVerified(current => ({ ...current, phone: false })); setOtpRequested(current => ({ ...current, phone: false })); }} placeholder="10-digit mobile number" /></span>{!verified.phone && <button type="button" onClick={requestPhoneOtp}>{otpRequested.phone ? 'Resend OTP' : 'Send OTP'}</button>}</span>
           {otpRequested.phone && !verified.phone && <span className="otp-row"><input aria-label="Mobile OTP" type="text" inputMode="numeric" maxLength="6" value={otp.phone} onChange={event => setOtp(current => ({ ...current, phone: event.target.value.replace(/\D/g, '') }))} placeholder="Enter 6-digit mobile OTP" /><button type="button" onClick={() => confirmOtp('phone')}>Confirm OTP</button></span>}
           {verified.phone && <span className="verified-note">Mobile OTP verified</span>}
         </label>
