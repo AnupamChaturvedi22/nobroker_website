@@ -9,6 +9,8 @@ import ListPropertyVerification from './features/properties/ListPropertyVerifica
 import BuyHomePage from './features/properties/BuyHomePage';
 import RentHomePage from './features/properties/RentHomePage';
 import ListPropertyPage from './features/properties/ListPropertyPage';
+import AdminLoginPage from './features/admin/AdminLoginPage';
+import AdminDashboard from './features/admin/AdminDashboard';
 
 function PublicRoutes() {
   const navigate = useNavigate();
@@ -45,6 +47,15 @@ export default function App() {
   const { user } = useAuth();
 
   return <Routes>
+    <Route path="/admin/login" element={<AdminLoginPage onSuccess={() => navigate('/admin')} />} />
+    <Route
+      path="/admin"
+      element={
+        user?.role === 'admin'
+          ? <AdminDashboard admin={user} onLogout={() => { logout(); navigate('/admin/login'); }} />
+          : <Navigate to="/admin/login" replace />
+      }
+    />
     <Route path="/choices" element={<ProtectedRoute><ChoiceRoute /></ProtectedRoute>} />
     <Route path="/buy-home" element={<ProtectedRoute><BuyHomePage onBack={() => navigate('/choices')} /></ProtectedRoute>} />
     <Route path="/rent-home" element={<ProtectedRoute><RentHomePage onBack={() => navigate('/choices')} /></ProtectedRoute>} />

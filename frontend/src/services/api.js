@@ -33,4 +33,5 @@ export async function apiRequest(path, body) {
 // Convenience wrappers for the auth endpoints
 export const registerUser = (payload) => apiRequest('/register', payload);
 export const loginUser = (payload) => apiRequest('/login', payload);
+export const loginAdmin = (payload) => apiRequest('/admin/login', payload);
 export const logoutUser = () => apiRequest('/logout', {});

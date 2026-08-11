@@ -1127,6 +1127,32 @@ footer small {
   border-color: rgba(36, 58, 71, 0.34);
 }
 
+/* Standalone, unlinked administrator sign-in route. */
+.admin-login-page { position: relative; min-height: 100vh; display: grid; place-items: center; padding: 24px; overflow: hidden; background: #f6f8fa; }
+.admin-login-page::before { content: ""; position: absolute; inset: 0 0 auto; height: 310px; background: radial-gradient(circle at 84% 48%, rgba(223,52,56,.13) 0 13%, transparent 13.3%), radial-gradient(circle at 91% 48%, rgba(223,52,56,.07) 0 24%, transparent 24.3%), linear-gradient(115deg, #fff 0%, #fff 52%, #f8e3e3 52%, #f4d8d9 100%); border-bottom: 1px solid #e4e8ec; }
+.admin-login-page::after { content: ""; position: absolute; top: -145px; right: max(6%, calc((100% - 1160px) / 2)); width: 390px; height: 390px; border: 1px solid rgba(223,52,56,.16); border-radius: 50%; box-shadow: 0 0 0 48px rgba(223,52,56,.045), 0 0 0 105px rgba(223,52,56,.03); }
+.admin-login-card { position: relative; z-index: 1; width: min(100%, 440px); padding: 42px; border: 1px solid #e2e7eb; border-top: 4px solid var(--red); border-radius: 12px; background: #fff; box-shadow: 0 18px 48px rgba(30,47,62,.12); }
+.admin-login-brand { display: flex; justify-content: center; margin-bottom: 35px; }
+.admin-login-eyebrow { margin: 0 0 8px; color: var(--red); font-size: 11px; font-weight: 800; letter-spacing: 1.5px; }
+.admin-login-card h1, .admin-dashboard-content h1 { margin: 0; color: #172c43; font-family: "Playfair Display", serif; font-size: 38px; letter-spacing: -.8px; }
+.admin-login-copy { margin: 12px 0 28px; color: var(--muted); line-height: 1.55; }
+.admin-login-form { display: grid; gap: 18px; }
+.admin-login-form label { display: grid; gap: 7px; color: #374653; font-size: 13px; font-weight: 700; }
+.admin-login-form input { width: 100%; padding: 12px; border: 1px solid #d5dce2; border-radius: 7px; outline: 0; color: var(--ink); background: #fbfcfd; font: inherit; }
+.admin-login-form input:focus { border-color: var(--red); box-shadow: 0 0 0 3px #fce4e4; }
+.admin-login-form button, .admin-dashboard-header button { border: 0; border-radius: 7px; background: var(--red); color: #fff; padding: 13px 18px; font: inherit; font-weight: 700; transition: .2s; }
+.admin-login-form button:hover:not(:disabled), .admin-dashboard-header button:hover { background: var(--red-dark); transform: translateY(-1px); }
+.admin-login-form button:disabled { cursor: wait; opacity: .65; }
+.admin-login-error { margin: 0; padding: 10px; border-radius: 6px; background: #fff0f0; color: #b42328; font-size: 13px; }
+.admin-login-note { margin: 26px 0 0; color: #84909a; font-size: 12px; text-align: center; }
+.admin-dashboard { min-height: 100vh; background: var(--paper); }
+.admin-dashboard-header { height: 76px; display: flex; align-items: center; justify-content: space-between; max-width: 1120px; margin: auto; padding: 0 24px; border-bottom: 1px solid var(--line); }
+.admin-dashboard-header button { padding: 9px 14px; font-size: 14px; }
+.admin-dashboard-content { max-width: 720px; margin: 0 auto; padding: 100px 24px; }
+.admin-dashboard-content > p:last-child { color: var(--muted); font-size: 17px; line-height: 1.6; }
+@media (max-width: 720px) { .admin-login-page::before { height: 250px; }.admin-login-page::after { opacity: .45; }.admin-login-card { padding: 42px; } }
+@media (max-width: 520px) { .admin-login-card { padding: 32px 24px; }.admin-login-card h1, .admin-dashboard-content h1 { font-size: 33px; } }
+
 /* Property-listing flow, shown after contact and location verification. */
 .lp-page { --listing-blue: #276eaa; --listing-blue-dark: #1f5f94; min-height: 100vh; background: var(--paper); color: var(--ink); }
 .lp-header { height: 76px; max-width: 1200px; margin: auto; padding: 0 2px; display: flex; align-items: center; justify-content: space-between; }

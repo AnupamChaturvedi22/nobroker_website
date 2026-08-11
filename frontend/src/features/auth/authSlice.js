@@ -42,6 +42,11 @@ const authSlice = createSlice({
     clearAuthError(state) {
       state.error = null;
     },
+    setAuthenticatedUser(state, action) {
+      state.user = action.payload;
+      state.status = 'succeeded';
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -77,7 +82,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { clearAuthError } = authSlice.actions;
+export const { clearAuthError, setAuthenticatedUser } = authSlice.actions;
 
 export const selectUser = (state) => state.auth.user;
 export const selectAuthStatus = (state) => state.auth.status;
