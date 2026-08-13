@@ -192,37 +192,6 @@ export const login = catchAsync(async (req, res, next) => {
 });
 
 // ======================================================
-// ADMIN LOGIN
-// ======================================================
-// Kept separate from the normal login endpoint so a standard customer
-// account can never be used to enter the administration area.
-export const adminLogin = catchAsync(async (req, res, next) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return next(new AppError("Email and password are required", 400));
-  }
-
-  const user = await findUserRecord({ email: email.toLowerCase().trim() });
-  const matched = user && await comparePassword(password, user);
-
-  // Use one message for all failures to avoid revealing which accounts
-  // exist or which of them have administrator access.
-  if (!matched || user.role !== "admin") {
-    return next(new AppError("Invalid administrator credentials", 401));
-  }
-
-  const auth = buildAuthResponse(user);
-  res.cookie("token", auth.token, getCookieOptions());
-
-  return res.status(200).json({
-    success: true,
-    message: "Administrator login successful",
-    data: auth,
-  });
-});
-
-// ======================================================
 // LOGOUT
 // ======================================================
 export const logout = catchAsync(async (req, res) => {
